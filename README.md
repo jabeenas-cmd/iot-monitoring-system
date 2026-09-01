@@ -110,18 +110,10 @@ Visualization
 📡 MQTT Communication
 
 The system uses an MQTT publish/subscribe architecture for communication between embedded nodes, the edge server, and the visualization layer.
+
 Communication Flow:
-IoT Device 1
-     ↓
-MQTT Publisher
-     ↓
-Mosquitto MQTT Broker
-     ↓
-     ├──→ Python Edge Server
-     │
-     ├──→ Node-RED
-     │
-     └──→ IoT Device 2
+IoT Device 1 → MQTT Publisher → Mosquitto MQTT Broker → Python Edge Server / Node-RED → IoT Device 2
+
 Example MQTT Topics
 factory/machine1/data
 factory/machine2/data
@@ -135,13 +127,7 @@ MQTT communication is secured using TLS 1.2 and mutual TLS (mTLS).
 
 The certificate infrastructure follows:
 
-Root CA
-   │
-   ▼
-Sub CA
-   │
-   ▼
-Client Certificates
+Root CA -> Sub CA -> Client Certificates
 
 Security Mechanisms
 
@@ -193,29 +179,7 @@ The model uses machine parameters such as:
 
 Predictive Maintenance Pipeline
 
-Historical Machine Data
-          │
-          ▼
-    Data Processing
-          │
-          ▼
-  Sensor Trend Analysis
-          │
-          ▼
-Multi-Sensor Abnormality Analysis
-          │
-          ▼
-Random Forest Regressor
-          │
-          ▼
-    Estimated RUL
-       (Days)
-          │
-          ▼
- Machine Health Report
-          │
-          ▼
-Maintenance Recommendation
+Historical Machine Data → Data Processing → Sensor Trend Analysis → Multi-Sensor Abnormality Analysis → Random Forest Regressor → Estimated RUL (Days) → Machine Health Report → Maintenance Recommendation
 
 ---
 
@@ -266,45 +230,27 @@ My primary contribution was firmware, embedded communication, edge processing, a
 
 The system also demonstrates MQTT-based control communication between the edge server and the actuator-side embedded node.
 Control Flow:
-Python Edge Server
-        ↓
-MQTT Control Command
-        ↓
-   IoT Device 2
-        ↓
-   MCU Control Logic
-        ↓
-   ┌────┼────┐
-   ↓    ↓    ↓
- Motor Buzzer Relay
+Python Edge Server → MQTT Control Command → IoT Device 2 → MCU Control Logic → Motor / Buzzer / Relay
 
 ---
 
 📁 Repository Structure
 
-Industrial-Monitoring-System/
-│
-├── ESP32_1/
-├── ESP32_2/
-├── STM32_1/
-├── STM32_2/
-├── ML_MODEL/
-├── server/
-├── Node-RED/
-├── docs/
-└── README.md
+"ESP32_1/" → ESP32 MQTT Publisher/Gateway Firmware
 
-Folder Description
+"ESP32_2/" → ESP32 MQTT Subscriber/Control Firmware
 
-Folder| Contents
-"ESP32_1/"| ESP32 MQTT publisher/gateway firmware
-"ESP32_2/"| ESP32 MQTT subscriber/control firmware
-"STM32_1/"| STM32 firmware
-"STM32_2/"| STM32 control-side firmware
-"ML_MODEL/"| RUL model and predictive-maintenance code
-"server/"| Python MQTT server, data processing and report generation
-"Node-RED/"| Digital Twin flows and dashboard
-"docs/"| Supporting documentation and diagrams
+"STM32_1/" → STM32 Firmware
+
+"STM32_2/" → STM32 Control-Side Firmware
+
+"ML_MODEL/" → RUL Model and Predictive-Maintenance Code
+
+"server/" → Python MQTT Server, Data Processing and Report Generation
+
+Supporting Documentation and Diagrams
+
+"README.md" → Project Documentation
 
 ---
 
